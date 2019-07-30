@@ -1,0 +1,14 @@
+{
+  "name": "ts-monad",
+  "version": "1.0.0",
+  "author": "saber2pr",
+  "private": true,
+  "scripts": {
+    "ts": "ts-node src/ts-main",
+    "hs": "runghc src/main"
+  },
+  "dependencies": {
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  }
+}
