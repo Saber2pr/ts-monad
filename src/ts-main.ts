@@ -7,31 +7,31 @@
 
 type Monad<T> = { _wrapped_: () => T };
 
-// type pure = <T>(a: T) => Monad<T>;
+type pure = <T>(a: T) => Monad<T>;
 const pure: <T>(a: T) => Monad<T> = value => ({ _wrapped_: () => value });
 
-// type join = <A, B>(m: Monad<A>, f: (a: A) => Monad<B>) => Monad<B>;
+type join = <A, B>(m: Monad<A>, f: (a: A) => Monad<B>) => Monad<B>;
 const join: <A, B>(m: Monad<A>, f: (a: A) => Monad<B>) => Monad<B> = (m, f) =>
   f(m._wrapped_());
 
-// type liftA = <A, B>(m: Monad<A>, f: (a: A) => B) => Monad<B>;
+type liftA = <A, B>(m: Monad<A>, f: (a: A) => B) => Monad<B>;
 const liftA: <A, B>(m: Monad<A>, f: (a: A) => B) => Monad<B> = (m, f) =>
   pure(f(m._wrapped_()));
 
 const fmap = liftA;
 
-// type async_init = () => Monad<number>
+type async_init = () => Monad<number>
 const async_init: () => Monad<number> = () => pure(1);
 
-// type async_join_add = (m: Monad<number>) => Monad<number>;
+type async_join_add = (m: Monad<number>) => Monad<number>;
 const async_join_add: (m: Monad<number>) => Monad<number> = m =>
   join(m, a => pure(a + 1));
 
-// type async_lift_add = (m: Monad<number>) => Monad<number>;
+type async_lift_add = (m: Monad<number>) => Monad<number>;
 const async_lift_add: (m: Monad<number>) => Monad<number> = m =>
   liftA(m, a => a + 1);
 
-// type async_fmap_add = (m: Monad<number>) => Monad<number>;
+type async_fmap_add = (m: Monad<number>) => Monad<number>;
 const async_fmap_add: (m: Monad<number>) => Monad<number> = m =>
   fmap(m, a => a + 1);
 
