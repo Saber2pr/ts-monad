@@ -53,7 +53,7 @@ function main() {
     )
   )(async_init())._wrapped_();
 
-  console.log(a);
+  return pure(() => console.log(a));
 }
 
-main();
+main()._wrapped_()();
