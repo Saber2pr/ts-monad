@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-07-30 14:01:42
  */
 
-type Monad<T> = { _wrapped_: () => T };
+type Monad<T> = { readonly _wrapped_: () => T };
 
 type pure = <T>(a: T) => Monad<T>;
 const pure: <T>(a: T) => Monad<T> = value => ({ _wrapped_: () => value });
@@ -20,7 +20,7 @@ const liftA: <A, B>(m: Monad<A>, f: (a: A) => B) => Monad<B> = (m, f) =>
 
 const fmap = liftA;
 
-type async_init = () => Monad<number>
+type async_init = () => Monad<number>;
 const async_init: () => Monad<number> = () => pure(1);
 
 type async_join_add = (m: Monad<number>) => Monad<number>;
